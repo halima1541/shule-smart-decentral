@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, Users, Clock, Award } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CBCLevels = () => {
   const levels = [
@@ -11,7 +12,8 @@ const CBCLevels = () => {
       subjects: ["Literacy", "Numeracy", "Creativity", "Movement"],
       duration: "2 Years",
       students: "Ages 4-5",
-      color: "from-accent/20 to-accent/10"
+      color: "from-accent/20 to-accent/10",
+      slug: "early-years"
     },
     {
       name: "Lower Primary",
@@ -20,7 +22,8 @@ const CBCLevels = () => {
       subjects: ["English", "Kiswahili", "Mathematics", "Environmental Activities"],
       duration: "3 Years", 
       students: "Ages 6-8",
-      color: "from-primary/20 to-primary/10"
+      color: "from-primary/20 to-primary/10",
+      slug: "lower-primary"
     },
     {
       name: "Upper Primary",
@@ -29,7 +32,8 @@ const CBCLevels = () => {
       subjects: ["Languages", "Mathematics", "Science", "Social Studies", "Creative Arts"],
       duration: "3 Years",
       students: "Ages 9-11", 
-      color: "from-secondary/20 to-secondary/10"
+      color: "from-secondary/20 to-secondary/10",
+      slug: "upper-primary"
     },
     {
       name: "Junior Secondary",
@@ -38,7 +42,8 @@ const CBCLevels = () => {
       subjects: ["Core Subjects", "Pre-Technical Studies", "Sports & Arts"],
       duration: "3 Years",
       students: "Ages 12-14",
-      color: "from-accent/20 to-accent/10"
+      color: "from-accent/20 to-accent/10",
+      slug: "junior-secondary"
     },
     {
       name: "Senior Secondary",
@@ -47,7 +52,8 @@ const CBCLevels = () => {
       subjects: ["Core Subjects", "Specialized Tracks", "Career Preparation"],
       duration: "3 Years",
       students: "Ages 15-17",
-      color: "from-primary/20 to-primary/10"
+      color: "from-primary/20 to-primary/10",
+      slug: "senior-secondary"
     }
   ];
 
@@ -123,12 +129,16 @@ const CBCLevels = () => {
                   </div>
                   
                   <div className="flex flex-col gap-3">
-                    <Button variant="learning" className="w-full">
-                      View Curriculum
-                    </Button>
-                    <Button variant="outline" className="w-full">
-                      Sample Content
-                    </Button>
+                    <Link to={`/curriculum?level=${level.slug}`}>
+                      <Button variant="learning" className="w-full">
+                        View Curriculum
+                      </Button>
+                    </Link>
+                    <Link to={`/sample-content?level=${level.slug}`}>
+                      <Button variant="outline" className="w-full">
+                        Sample Content
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </CardContent>

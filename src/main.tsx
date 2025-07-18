@@ -7,11 +7,21 @@ import { Toaster } from "@/components/ui/toaster";
 
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
+import Curriculum from "@/pages/Curriculum";
+import SampleContent from "@/pages/SampleContent";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Index />,
+  },
+  {
+    path: "/curriculum",
+    element: <Curriculum />,
+  },
+  {
+    path: "/sample-content",
+    element: <SampleContent />,
   },
   {
     path: "*",
