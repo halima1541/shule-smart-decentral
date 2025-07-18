@@ -1,12 +1,41 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Menu, X, BookOpen, Users, MessageCircle } from "lucide-react";
+import { Menu, X, BookOpen, LogOut, User } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [signupName, setSignupName] = useState("");
+  const [signupEmail, setSignupEmail] = useState("");
+  const [signupPassword, setSignupPassword] = useState("");
+  const [userType, setUserType] = useState("student");
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const { user, signIn, signUp, signOut } = useAuth();
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    await signIn(loginEmail, loginPassword);
+    setIsLoading(false);
+    setLoginEmail("");
+    setLoginPassword("");
+  };
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    await signUp(signupEmail, signupPassword, signupName, userType);
+    setIsLoading(false);
+    setSignupName("");
+    setSignupEmail("");
+    setSignupPassword("");
+  };
 
   const LoginDialog = () => (
     <Dialog>
@@ -16,18 +45,35 @@ const Header = () => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Login to CBC Learn</DialogTitle>
+          <DialogDescription>Enter your credentials to access your account</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <form onSubmit={handleLogin} className="grid gap-4 py-4">
           <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" placeholder="Enter your email" />
+            <Label htmlFor="login-email">Email</Label>
+            <Input 
+              id="login-email" 
+              type="email" 
+              placeholder="Enter your email"
+              value={loginEmail}
+              onChange={(e) => setLoginEmail(e.target.value)}
+              required
+            />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" placeholder="Enter your password" />
+            <Label htmlFor="login-password">Password</Label>
+            <Input 
+              id="login-password" 
+              type="password" 
+              placeholder="Enter your password"
+              value={loginPassword}
+              onChange={(e) => setLoginPassword(e.target.value)}
+              required
+            />
           </div>
-          <Button variant="hero" className="w-full">Login</Button>
-        </div>
+          <Button variant="hero" className="w-full" type="submit" disabled={isLoading}>
+            {isLoading ? "Signing in..." : "Login"}
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   );
@@ -40,29 +86,58 @@ const Header = () => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Join CBC Learn</DialogTitle>
+          <DialogDescription>Create your account to start learning</DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <form onSubmit={handleSignup} className="grid gap-4 py-4">
           <div className="grid gap-2">
             <Label htmlFor="signup-name">Full Name</Label>
-            <Input id="signup-name" type="text" placeholder="Enter your full name" />
+            <Input 
+              id="signup-name" 
+              type="text" 
+              placeholder="Enter your full name"
+              value={signupName}
+              onChange={(e) => setSignupName(e.target.value)}
+              required
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="signup-email">Email</Label>
-            <Input id="signup-email" type="email" placeholder="Enter your email" />
+            <Input 
+              id="signup-email" 
+              type="email" 
+              placeholder="Enter your email"
+              value={signupEmail}
+              onChange={(e) => setSignupEmail(e.target.value)}
+              required
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="signup-password">Password</Label>
-            <Input id="signup-password" type="password" placeholder="Create a password" />
+            <Input 
+              id="signup-password" 
+              type="password" 
+              placeholder="Create a password"
+              value={signupPassword}
+              onChange={(e) => setSignupPassword(e.target.value)}
+              required
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="user-type">I am a</Label>
-            <select id="user-type" className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+            <select 
+              id="user-type" 
+              className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              value={userType}
+              onChange={(e) => setUserType(e.target.value)}
+            >
               <option value="student">Student</option>
               <option value="teacher">Teacher</option>
             </select>
           </div>
-          <Button variant="hero" className="w-full">Create Account</Button>
-        </div>
+          <Button variant="hero" className="w-full" type="submit" disabled={isLoading}>
+            {isLoading ? "Creating Account..." : "Create Account"}
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   );
@@ -75,6 +150,7 @@ const Header = () => {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Welcome to CBC Learn</DialogTitle>
+          <DialogDescription>Choose how you'd like to get started with our platform</DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <p className="text-muted-foreground">Choose how you'd like to get started:</p>
@@ -112,9 +188,24 @@ const Header = () => {
 
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <LoginDialog />
-            <SignupDialog />
-            <GetStartedDialog />
+            {user ? (
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <User className="h-4 w-4" />
+                  <span>{user.email}</span>
+                </div>
+                <Button variant="ghost" onClick={signOut}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <>
+                <LoginDialog />
+                <SignupDialog />
+                <GetStartedDialog />
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -140,9 +231,24 @@ const Header = () => {
                 About
               </a>
               <div className="flex flex-col gap-2 mt-4">
-                <LoginDialog />
-                <SignupDialog />
-                <GetStartedDialog />
+                {user ? (
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <User className="h-4 w-4" />
+                      <span>{user.email}</span>
+                    </div>
+                    <Button variant="ghost" onClick={signOut} className="justify-start">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </Button>
+                  </div>
+                ) : (
+                  <>
+                    <LoginDialog />
+                    <SignupDialog />
+                    <GetStartedDialog />
+                  </>
+                )}
               </div>
             </nav>
           </div>
