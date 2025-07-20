@@ -9,6 +9,7 @@ import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
 import Curriculum from "@/pages/Curriculum";
 import SampleContent from "@/pages/SampleContent";
+import Demo from "@/pages/Demo";
 
 const router = createBrowserRouter([
   {
@@ -19,10 +20,14 @@ const router = createBrowserRouter([
     path: "/curriculum",
     element: <Curriculum />,
   },
-  {
-    path: "/sample-content",
-    element: <SampleContent />,
-  },
+        {
+          path: "/sample-content",
+          element: <SampleContent />,
+        },
+        {
+          path: "/demo",
+          element: <Demo />,
+        },
   {
     path: "*",
     element: <NotFound />,

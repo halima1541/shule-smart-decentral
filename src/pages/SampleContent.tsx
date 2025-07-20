@@ -49,6 +49,32 @@ const SampleContent = () => {
               difficulty: 'Beginner'
             }
           ]
+        },
+        {
+          name: 'Creative Activities',
+          samples: [
+            {
+              title: 'Art and Craft: Paper Flowers',
+              type: 'Creative Workshop',
+              duration: '30 minutes',
+              description: 'Create beautiful paper flowers while learning colors and shapes',
+              preview: 'Let\'s make red roses, yellow sunflowers, and blue forget-me-nots...',
+              difficulty: 'Beginner'
+            }
+          ]
+        },
+        {
+          name: 'Environmental Activities',
+          samples: [
+            {
+              title: 'My Family Tree',
+              type: 'Interactive Activity',
+              duration: '25 minutes',
+              description: 'Learn about family relationships and create a family tree',
+              preview: 'This is my mother, this is my father, these are my grandparents...',
+              difficulty: 'Beginner'
+            }
+          ]
         }
       ]
     },
@@ -86,6 +112,14 @@ const SampleContent = () => {
               description: 'Learn common greetings in Kiswahili with pronunciation guide',
               preview: 'Hujambo - Hello, Habari - How are you, Asante - Thank you',
               difficulty: 'Grade 1'
+            },
+            {
+              title: 'Kusoma: Hadithi Fupi',
+              type: 'Reading Exercise',
+              duration: '25 minutes',
+              description: 'Read simple Kiswahili stories and practice comprehension',
+              preview: 'Paka alipenda mchezo. Alikimbia hapa na pale...',
+              difficulty: 'Grade 2'
             }
           ]
         },
@@ -138,6 +172,27 @@ const SampleContent = () => {
               description: 'Learn to write descriptive paragraphs using sensory details',
               preview: 'Describe your favorite place using words that help readers see, hear, smell...',
               difficulty: 'Grade 5'
+            },
+            {
+              title: 'Poetry Analysis: African Folk Tales',
+              type: 'Literature Study',
+              duration: '40 minutes',
+              description: 'Analyze themes and literary devices in traditional African poetry',
+              preview: 'The spider and the tortoise teach us about wisdom...',
+              difficulty: 'Grade 6'
+            }
+          ]
+        },
+        {
+          name: 'Kiswahili',
+          samples: [
+            {
+              title: 'Fasihi: Methali na Nahau',
+              type: 'Cultural Study',
+              duration: '35 minutes',
+              description: 'Explore Kiswahili proverbs and idioms with cultural context',
+              preview: 'Haba na ukunga halipatani - A proverb about patience and timing...',
+              difficulty: 'Grade 5'
             }
           ]
         },
@@ -151,6 +206,14 @@ const SampleContent = () => {
               description: 'Understanding fractions using visual models and real-life examples',
               preview: 'If you eat 2 slices of a pizza cut into 8 pieces, you ate 2/8 of the pizza',
               difficulty: 'Grade 4'
+            },
+            {
+              title: 'Decimal Numbers',
+              type: 'Problem Solving',
+              duration: '35 minutes',
+              description: 'Work with decimal numbers in money and measurement contexts',
+              preview: 'If 1 meter = 1.0m, then 50 centimeters = 0.5m...',
+              difficulty: 'Grade 5'
             }
           ]
         },
@@ -164,6 +227,178 @@ const SampleContent = () => {
               description: 'Observe and document the stages of plant growth from seed to flower',
               preview: 'Follow the journey: Seed → Germination → Seedling → Adult Plant → Flower',
               difficulty: 'Grade 5'
+            }
+          ]
+        },
+        {
+          name: 'Social Studies',
+          samples: [
+            {
+              title: 'Kenya\'s Independence Heroes',
+              type: 'Historical Study',
+              duration: '40 minutes',
+              description: 'Learn about key figures in Kenya\'s struggle for independence',
+              preview: 'Jomo Kenyatta, Dedan Kimathi, and others who fought for our freedom...',
+              difficulty: 'Grade 6'
+            }
+          ]
+        }
+      ]
+    },
+    'junior-secondary': {
+      name: 'Junior Secondary',
+      subjects: [
+        {
+          name: 'English',
+          samples: [
+            {
+              title: 'Poetry Analysis: Discovering Metaphors',
+              type: 'Literature Workshop',
+              duration: '50 minutes',
+              description: 'Analyze metaphors and symbolism in contemporary African poetry',
+              preview: 'The baobab tree stands as a metaphor for African resilience...',
+              difficulty: 'Grade 7'
+            },
+            {
+              title: 'Debate Skills: Persuasive Arguments',
+              type: 'Communication Skills',
+              duration: '45 minutes',
+              description: 'Learn to construct and present persuasive arguments effectively',
+              preview: 'Should uniforms be mandatory in schools? Let\'s examine both sides...',
+              difficulty: 'Grade 8'
+            }
+          ]
+        },
+        {
+          name: 'Kiswahili',
+          samples: [
+            {
+              title: 'Fasihi ya Kiswahili: Mashairi',
+              type: 'Literary Analysis',
+              duration: '45 minutes',
+              description: 'Study classical Kiswahili poetry and its cultural significance',
+              preview: 'Shaaban Robert na mashairi yake ya kijamii...',
+              difficulty: 'Grade 8'
+            }
+          ]
+        },
+        {
+          name: 'Mathematics',
+          samples: [
+            {
+              title: 'Introduction to Algebra',
+              type: 'Problem Solving',
+              duration: '50 minutes',
+              description: 'Solve algebraic equations using substitution and elimination methods',
+              preview: 'If x + 3 = 7, then x = 4. Let\'s try more complex examples...',
+              difficulty: 'Grade 7'
+            },
+            {
+              title: 'Geometry: Area and Perimeter',
+              type: 'Mathematical Modeling',
+              duration: '45 minutes',
+              description: 'Calculate areas and perimeters of complex shapes and real-world objects',
+              preview: 'A football field measures 100m × 60m. What is its area and perimeter?',
+              difficulty: 'Grade 8'
+            }
+          ]
+        },
+        {
+          name: 'Integrated Science',
+          samples: [
+            {
+              title: 'Chemical Reactions in Daily Life',
+              type: 'Lab Experiment',
+              duration: '60 minutes',
+              description: 'Explore chemical reactions through safe, hands-on experiments',
+              preview: 'When baking soda meets vinegar, a chemical reaction produces gas...',
+              difficulty: 'Grade 8'
+            }
+          ]
+        },
+        {
+          name: 'Pre-Technical Studies',
+          samples: [
+            {
+              title: 'Introduction to Programming',
+              type: 'Coding Workshop',
+              duration: '55 minutes',
+              description: 'Learn basic programming concepts using visual programming tools',
+              preview: 'Let\'s create a simple calculator using block-based coding...',
+              difficulty: 'Grade 9'
+            }
+          ]
+        }
+      ]
+    },
+    'senior-secondary': {
+      name: 'Senior Secondary',
+      subjects: [
+        {
+          name: 'Core Subjects',
+          samples: [
+            {
+              title: 'Advanced Essay Writing',
+              type: 'Writing Masterclass',
+              duration: '60 minutes',
+              description: 'Master argumentative and expository essay writing for university preparation',
+              preview: 'Structure your argument: Introduction, body paragraphs with evidence, conclusion...',
+              difficulty: 'Grade 11'
+            },
+            {
+              title: 'Mathematical Problem Solving',
+              type: 'Advanced Mathematics',
+              duration: '55 minutes',
+              description: 'Tackle complex mathematical problems using multiple approaches',
+              preview: 'Optimization problems: Find the maximum area of a rectangle...',
+              difficulty: 'Grade 12'
+            }
+          ]
+        },
+        {
+          name: 'STEM Track',
+          samples: [
+            {
+              title: 'Physics: Electromagnetic Induction',
+              type: 'Laboratory Investigation',
+              duration: '70 minutes',
+              description: 'Investigate Faraday\'s law through hands-on experiments',
+              preview: 'Moving a magnet through a coil generates electric current...',
+              difficulty: 'Grade 11'
+            },
+            {
+              title: 'Computer Science: Data Structures',
+              type: 'Programming Project',
+              duration: '65 minutes',
+              description: 'Implement and analyze arrays, lists, and trees in Python',
+              preview: 'Arrays store multiple values: [1, 2, 3, 4, 5]...',
+              difficulty: 'Grade 12'
+            }
+          ]
+        },
+        {
+          name: 'Arts Track',
+          samples: [
+            {
+              title: 'African Literature: Post-Colonial Themes',
+              type: 'Literary Criticism',
+              duration: '60 minutes',
+              description: 'Analyze themes of identity and culture in African literature',
+              preview: 'Ngugi wa Thiong\'o\'s works explore language and cultural identity...',
+              difficulty: 'Grade 11'
+            }
+          ]
+        },
+        {
+          name: 'Social Sciences Track',
+          samples: [
+            {
+              title: 'Economic Development in Kenya',
+              type: 'Research Project',
+              duration: '75 minutes',
+              description: 'Analyze Kenya\'s economic growth and development challenges',
+              preview: 'Vision 2030 aims to transform Kenya into a middle-income country...',
+              difficulty: 'Grade 12'
             }
           ]
         }
