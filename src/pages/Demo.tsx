@@ -6,17 +6,22 @@ import { ArrowLeft, Play, Pause, RotateCcw, Volume2, VolumeX, BookOpen, Bot, Use
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useToast } from "@/hooks/use-toast";
+import demoStudentImg from "@/assets/demo-student.jpg";
+import demoTeacherImg from "@/assets/demo-teacher.jpg";
+import demoAiImg from "@/assets/demo-ai.jpg";
 
 const Demo = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentDemo, setCurrentDemo] = useState("student");
+  const { toast } = useToast();
 
   const demoVideos = {
     student: {
       title: "Student Learning Experience",
       description: "See how students interact with personalized CBC content",
-      thumbnail: "/placeholder.svg",
+      thumbnail: demoStudentImg,
       duration: "3:24",
       features: [
         "Personalized learning paths",
@@ -28,7 +33,7 @@ const Demo = () => {
     teacher: {
       title: "Teacher Dashboard",
       description: "Explore classroom management and content creation tools",
-      thumbnail: "/placeholder.svg", 
+      thumbnail: demoTeacherImg, 
       duration: "2:45",
       features: [
         "Class progress monitoring",
@@ -40,7 +45,7 @@ const Demo = () => {
     ai: {
       title: "AI Assistant Demo",
       description: "Experience our intelligent tutoring system",
-      thumbnail: "/placeholder.svg",
+      thumbnail: demoAiImg,
       duration: "4:12", 
       features: [
         "Natural language interaction",
@@ -52,6 +57,20 @@ const Demo = () => {
   };
 
   const currentVideo = demoVideos[currentDemo as keyof typeof demoVideos];
+
+  const handleStartTrial = () => {
+    toast({
+      title: "Welcome to CBC Learning!",
+      description: "Your free trial has started. Check your email for login details.",
+    });
+  };
+
+  const handleScheduleDemo = () => {
+    toast({
+      title: "Demo Scheduled!",
+      description: "We'll contact you within 24 hours to schedule your personalized demo.",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -201,10 +220,10 @@ const Demo = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button variant="hero" className="w-full">
+                  <Button variant="hero" className="w-full" onClick={handleStartTrial}>
                     Start Free Trial
                   </Button>
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full" onClick={handleScheduleDemo}>
                     Schedule Demo Call
                   </Button>
                 </CardContent>

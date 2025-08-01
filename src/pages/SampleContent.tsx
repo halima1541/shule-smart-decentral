@@ -6,11 +6,34 @@ import { ArrowLeft, BookOpen, Play, Download, Eye, Clock, Users } from "lucide-r
 import { Link, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useToast } from "@/hooks/use-toast";
 
 const SampleContent = () => {
   const [searchParams] = useSearchParams();
   const level = searchParams.get('level') || 'lower-primary';
   const subjectIndex = parseInt(searchParams.get('subject') || '0');
+  const { toast } = useToast();
+
+  const handleStartLearning = (title: string) => {
+    toast({
+      title: "Starting Lesson!",
+      description: `Opening "${title}" - enjoy your learning journey!`,
+    });
+  };
+
+  const handleDownload = (title: string) => {
+    toast({
+      title: "Download Started",
+      description: `Downloading "${title}" for offline access.`,
+    });
+  };
+
+  const handlePreview = (title: string) => {
+    toast({
+      title: "Preview Available",
+      description: `Opening preview for "${title}".`,
+    });
+  };
 
   const sampleContent = {
     'early-years': {
@@ -497,15 +520,27 @@ const SampleContent = () => {
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 pt-4 border-t border-border">
-                  <Button variant="hero" className="flex items-center gap-2">
+                  <Button 
+                    variant="hero" 
+                    className="flex items-center gap-2"
+                    onClick={() => handleStartLearning(sample.title)}
+                  >
                     <Play className="h-4 w-4" />
                     Start Learning
                   </Button>
-                  <Button variant="outline" className="flex items-center gap-2">
+                  <Button 
+                    variant="outline" 
+                    className="flex items-center gap-2"
+                    onClick={() => handleDownload(sample.title)}
+                  >
                     <Download className="h-4 w-4" />
                     Download
                   </Button>
-                  <Button variant="ghost" className="flex items-center gap-2">
+                  <Button 
+                    variant="ghost" 
+                    className="flex items-center gap-2"
+                    onClick={() => handlePreview(sample.title)}
+                  >
                     <Eye className="h-4 w-4" />
                     Preview
                   </Button>
@@ -525,12 +560,21 @@ const SampleContent = () => {
                 including interactive lessons, assessments, and teacher resources.
               </p>
               <div className="flex gap-4 justify-center">
-                <Button variant="hero" size="lg">
+                <Button 
+                  variant="hero" 
+                  size="lg"
+                  onClick={() => toast({
+                    title: "Welcome to CBC Learning!",
+                    description: "Your free account has been created. Check your email for login details.",
+                  })}
+                >
                   Sign Up Free
                 </Button>
-                <Button variant="outline" size="lg">
-                  Browse All Levels
-                </Button>
+                <Link to="/curriculum">
+                  <Button variant="outline" size="lg">
+                    Browse All Levels
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
