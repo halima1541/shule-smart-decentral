@@ -2,17 +2,11 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bot, Send, User, BookOpen, HelpCircle, Lightbulb } from "lucide-react";
+import { Bot, Send, User, BookOpen, HelpCircle, Lightbulb, Loader2 } from "lucide-react";
+import { useAIChat } from "@/hooks/useAIChat";
 
 const ChatbotDemo = () => {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      type: "bot",
-      content: "Hello! I'm your CBC learning assistant. I can help you with curriculum questions, assignments, and connect you with teachers. What would you like to know?",
-      timestamp: "10:30 AM"
-    }
-  ]);
+  const { messages, sendMessage, isLoading } = useAIChat();
   const [inputValue, setInputValue] = useState("");
 
   const suggestedQuestions = [
@@ -22,29 +16,12 @@ const ChatbotDemo = () => {
     "Connect me with my teacher"
   ];
 
-  const handleSendMessage = () => {
-    if (!inputValue.trim()) return;
-
-    const newMessage = {
-      id: messages.length + 1,
-      type: "user",
-      content: inputValue,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-
-    setMessages([...messages, newMessage]);
+  const handleSendMessage = async () => {
+    if (!inputValue.trim() || isLoading) return;
+    
+    const message = inputValue;
     setInputValue("");
-
-    // Simulate bot response
-    setTimeout(() => {
-      const botResponse = {
-        id: messages.length + 2,
-        type: "bot", 
-        content: "That's a great question! Let me help you with that. In CBC Grade 5 Mathematics, students focus on number operations, fractions, measurement, and basic geometry. Would you like me to show you specific topics or exercises?",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      setMessages(prev => [...prev, botResponse]);
-    }, 1000);
+    await sendMessage(message);
   };
 
   const handleSuggestedQuestion = (question: string) => {
@@ -129,11 +106,20 @@ const ChatbotDemo = () => {
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       placeholder="Ask me anything about CBC..."
-                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                      onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSendMessage()}
                       className="flex-1"
+                      disabled={isLoading}
                     />
-                    <Button onClick={handleSendMessage} variant="hero">
-                      <Send className="h-4 w-4" />
+                    <Button 
+                      onClick={handleSendMessage} 
+                      variant="hero"
+                      disabled={isLoading || !inputValue.trim()}
+                    >
+                      {isLoading ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <Send className="h-4 w-4" />
+                      )}
                     </Button>
                   </div>
                 </div>
